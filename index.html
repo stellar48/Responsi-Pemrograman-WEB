@@ -8,30 +8,73 @@
 </head>
 <body>
     <div class="container">
+        <!--
         <div class="leftprofile">
             <form action="#">
                 <img src="megumi.png" alt="foto profil" id="preview" class="previewfoto">
                 <label for="file" class="upload-foto">Unggah foto</label>
+                <button type="submit" class="upload-btn">Unggah</button> 
                 <input type="file" id="file"  hidden>
-                <!-- <button type="submit" class="upload-btn">Unggah</button> -->
                 
             </form>
-        </div>
+        </div> 
+        -->
         <div class="rightprofile">
-            <form action="#">
+            <form id="profilForm" enctype="multipart/form-data">
                 <label for="nama">Nama : </label>
-                <input type="text" name="nama" id="nama">
+                <input type="text" name="nama" id="nama" disabled>
                 <label for="email">Email: </label>
-                <input type="text" name="email" id="email">
+                <input type="text" name="email" id="email" disabled>
                 <label for="bio">Bio : </label>
-                <input type="text" name="bio" id="bio">
-
-                <button type="submit" id="perbaruiprofil" class="perbaruiprofil">Edit Profil</button>
-                <button type="submit" id="perbaruiprofil" class="perbaruiprofil">Simpan</button>
-                <!-- <input type="button" id="perbaruiprofil" value="Perbarui profil" class="perbaruiprofil-btn"> -->
+                <input type="text" name="bio" id="bio" disabled>
+                <button type="button" id="editprofil" class="perbaruiprofil">Edit Profil</button>
+                <button type="submit" id="simpanprofil" class="perbaruiprofil" style="display:none;">Simpan</button>
             </form>
-
         </div>
     </div>
+    
+    <script>
+const form = document.getElementById('profilForm');
+const inputNama = document.getElementById('nama');
+const inputEmail = document.getElementById('email');
+const inputBio = document.getElementById('bio');
+const btnEdit = document.getElementById('editprofil');
+const btnSimpan = document.getElementById('simpanprofil');
+
+// Awal: input disabled, hanya tombol Edit yang muncul
+btnEdit.addEventListener('click', function() {
+    inputNama.disabled = false;
+    inputEmail.disabled = false;
+    inputBio.disabled = false;
+    btnEdit.style.display = 'none';
+    btnSimpan.style.display = 'inline-block';
+});
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault(); // Mencegah reload
+
+    const formData = new FormData(form);
+
+    fetch('proses.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        // Tampilkan hasil ke input (replace value)
+        inputNama.value = data.nama;
+        inputEmail.value = data.email;
+        inputBio.value = data.bio;
+        // Disable lagi input setelah simpan
+        inputNama.disabled = true;
+        inputEmail.disabled = true;
+        inputBio.disabled = true;
+        btnEdit.style.display = 'inline-block';
+        btnSimpan.style.display = 'none';
+        alert('Data berhasil disimpan!');
+    })
+    .catch(() => alert('Gagal menyimpan data!'));
+});
+</script>
 </body>
 </html>
