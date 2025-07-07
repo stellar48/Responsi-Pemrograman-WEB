@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Profile</title>
+</head>
+<body>
+    <div class="container">
+        <div class="leftprofile">
+            <form action="#">
+                <img src="megumi.png" alt="foto profil" id="preview" class="previewfoto">
+                <label for="file" class="upload-foto">Unggah foto</label>
+                <input type="file" id="file"  hidden>
+                <!-- <button type="submit" class="upload-btn">Unggah</button> -->
+                
+            </form>
+        </div>
+        <div class="rightprofile">
+            <form action="#">
+                <label for="nama">Nama : </label>
+                <input type="text" name="nama" id="nama">
+                <label for="email">Email: </label>
+                <input type="text" name="email" id="email">
+                <label for="bio">Bio : </label>
+                <input type="text" name="bio" id="bio">
+
+                <button type="submit" id="perbaruiprofil" class="perbaruiprofil">Edit Profil</button>
+                <button type="submit" id="perbaruiprofil" class="perbaruiprofil">Simpan</button>
+                <!-- <input type="button" id="perbaruiprofil" value="Perbarui profil" class="perbaruiprofil-btn"> -->
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>
